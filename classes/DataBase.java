@@ -1,17 +1,24 @@
-package classes;
+package com.mycompany.padroes;
 
 import java.util.ArrayList;
 
 //APLIQUE SINGLETON NESTA CLASSE
 
 public class DataBase {
-    
+    private static DataBase instance;
     private ArrayList<Aluno> alunos;
     private ArrayList<Professor> professores;
     private ArrayList<Curso> cursos;
     private ArrayList<Turma> turmas;
+    
+    public static DataBase getInstance(){
+        if(instance == null)
+            instance = new DataBase();
+        return instance;
+    }
 
-    public DataBase() {
+    private DataBase() {
+        
         this.alunos = new ArrayList<>();
         this.professores = new ArrayList<>();
         this.cursos = new ArrayList<>();

@@ -1,4 +1,4 @@
-package classes;
+package com.mycompany.padroes;
 
 public class Nota {
 private Double nota1;

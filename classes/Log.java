@@ -1,4 +1,4 @@
-package classes;
+package com.mycompany.padroes;
 
 public class Log {
   private Nota notaAnterior;

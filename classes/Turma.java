@@ -1,4 +1,4 @@
-package classes;
+package com.mycompany.padroes;
 
 import java.util.ArrayList;
 import java.util.List;

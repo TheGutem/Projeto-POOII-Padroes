@@ -1,4 +1,4 @@
-package classes;
+package com.mycompany.padroes;
 
 public class Aluno extends Pessoa implements Printable {
 private String matricula;
