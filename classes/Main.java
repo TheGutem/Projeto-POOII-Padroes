@@ -19,7 +19,7 @@ public class Main {
     
     //FACA UM MENU PARA SELECIONAR A OPCAO (1 - Prof/ 2- Coord) USANDO A SENHA EM PROFESSOR
     //MENU
-      System.out.println("Informe o seu cargo: ");
+      System.out.println("Informe o seu cargo (1 para coordenador, 2 para professor: ");
       cargo = entrada.nextInt();
       
       if(cargo == 1){
@@ -458,9 +458,9 @@ public static void cadastrarTurma(){
 
   System.out.print("Informe identificação: ");
   turma.setIdentificacao(entrada.nextLine());
-
+//TODO: criar uma lista de semestres
   System.out.print("Informe o semestre: ");
-  turma.setSemestre(entrada.nextLine());
+  String nomeSemestre = entrada.nextLine();
 
   System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
   for (int i = 0; i < db.getCursos().size(); i++) {

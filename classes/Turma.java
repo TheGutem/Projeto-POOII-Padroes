@@ -7,7 +7,7 @@ public class Turma {
 
   private String identificacao;
   private Curso curso;
-  private String semestre;
+  private Semestre semestre;
   private ArrayList<Professor> professores = new ArrayList<>();
   private ArrayList<AlunoTurma> alunos = new ArrayList<>();
 
@@ -18,12 +18,12 @@ public class Turma {
 
   }
 
-  public Turma( String indentificacao, Curso curso, String semestre){
-    this.identificacao = indentificacao;
+  public Turma(String identificacao, Curso curso, Semestre semestre) {
+    this.identificacao = identificacao;
     this.curso = curso;
     this.semestre = semestre;
     this.logs = new ArrayList<>();
-  }
+}
 
   public String getIdentificacao(){
     return identificacao;
@@ -41,12 +41,12 @@ public class Turma {
     this. curso = curso;
   }
 
-public String getSemestre(){
-  return semestre;
+public Semestre getSemestre() {
+    return semestre;
 }
 
-public void setSemestre( String semestre){
-  this.semestre = semestre;
+public void setSemestre(Semestre semestre) {
+    this.semestre = semestre;
 }
 
   public ArrayList<Professor> getProfessores() {
