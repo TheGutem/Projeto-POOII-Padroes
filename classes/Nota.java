@@ -44,7 +44,7 @@ public Double getNota2() {
 
 public void setNota2(Double nota2) {
   if(!bloqueado){
-    this.nota1 = nota2;
+    this.nota2 = nota2;
     }
 }
 
@@ -55,7 +55,7 @@ public Double getNota3() {
 
 public void setNota3(Double nota3) {
   if(!bloqueado){
-    this.nota1 = nota3;
+    this.nota3 = nota3;
     }
 }
 
