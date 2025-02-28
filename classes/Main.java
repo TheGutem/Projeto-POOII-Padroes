@@ -13,42 +13,46 @@ public class Main {
 
     public static void main(String[] args) {
         entrada = new Scanner(System.in);
-            try {
-            // Configura a saída do console para usar UTF-8
+        try {
             System.setOut(new PrintStream(System.out, true, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        
-        System.out.println("╔═════════════════════════════════════════╗");
-        System.out.println("║          MENU PRINCIPAL            ║");
-        System.out.println("╠═════════════════════════════════════════╣");
-        System.out.println("║ 1 - Coordenador                    ║");
-        System.out.println("║ 2 - Professor                      ║");
-        System.out.println("║ 3 - Exportar/Importar Dados        ║");
-        System.out.println("║ 0 - Sair                           ║");
-        System.out.println("╚═════════════════════════════════════════╝");
-        System.out.print("Opção: ");
-        cargo = entrada.nextInt();
 
-        switch (cargo) {
-            case 1:
-                menuCoordenador();
-                break;
-            case 2:
-                menuProfessor();
-                break;
-            case 3:
-                menuExportarImportarDados();
-                break;
-            case 0:
-                System.out.println("Saindo...");
-                break;
-            default:
-                System.out.println("Opção inválida!");
-        }
+        menuPrincipal(); //começa chamando o menu principal
+    }
 
-        entrada.close();
+    public static void menuPrincipal() {
+        do {
+            System.out.println("╔═════════════════════════════════════════╗");
+            System.out.println("║          MENU PRINCIPAL            ║");
+            System.out.println("╠═════════════════════════════════════════╣");
+            System.out.println("║ 1 - Coordenador                    ║");
+            System.out.println("║ 2 - Professor                      ║");
+            System.out.println("║ 3 - Exportar/Importar Dados        ║");
+            System.out.println("║ 0 - Sair                           ║");
+            System.out.println("╚═════════════════════════════════════════╝");
+            System.out.print("Opção: ");
+            cargo = entrada.nextInt();
+
+            switch (cargo) {
+                case 1:
+                    menuCoordenador();
+                    break;
+                case 2:
+                    menuProfessor();
+                    break;
+                case 3:
+                    menuExportarImportarDados();
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    entrada.close();
+                    return; //termina o programa
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while (cargo != 0);
     }
 
     public static void menuCoordenador() {
@@ -68,7 +72,7 @@ public class Main {
             System.out.println("║    10 - Lista de recuperação    ║");
             System.out.println("║        11 - Lista geral         ║");
             System.out.println("║         12 - Histórico          ║");
-            System.out.println("║           0 - Sair              ║");
+            System.out.println("║           0 - Voltar            ║");
             System.out.println("╚═════════════════════════════════════════╝");
             System.out.print("Opção: ");
             opcao = entrada.nextInt();
@@ -111,9 +115,9 @@ public class Main {
                     exibirHistorico();
                     break;
                 case 0:
-                    System.out.println("Saindo...");
-                    
-                    break;
+                    System.out.println("Voltando ao menu principal...");
+                    menuPrincipal(); //volta pro menu principal
+                    return;
                 default:
                     System.out.println("Opção inválida!");
             }
@@ -129,7 +133,7 @@ public class Main {
             System.out.println("║     2 - Mostrar a estatística           ║");
             System.out.println("║      3 - Lista de recuperação           ║");
             System.out.println("║           4 - Histórico                 ║");
-            System.out.println("║             0 - Sair                    ║");
+            System.out.println("║             0 - Voltar                  ║");
             System.out.println("╚═════════════════════════════════════════╝");
             System.out.print("Opção: ");
             opcao = entrada.nextInt();
@@ -148,69 +152,70 @@ public class Main {
                     exibirHistorico();
                     break;
                 case 0:
-                    System.out.println("Saindo...");
-                    break;
+                    System.out.println("Voltando ao menu principal...");
+                    menuPrincipal(); //volta pro menu principal
+                    return;
                 default:
                     System.out.println("Opção inválida!");
             }
         } while (opcao != 0);
     }
 
-    //menu para exportar/importar dados
     public static void menuExportarImportarDados() {
-    do {
-        System.out.println("╔═════════════════════════════════════════╗");
-        System.out.println("║       MENU EXPORTAR/IMPORTAR DADOS      ║");
-        System.out.println("╠═════════════════════════════════════════╣");
-        System.out.println("║ 1 - Exportar dados dos alunos (JSON)    ║");
-        System.out.println("║ 2 - Importar dados dos alunos (MEC)     ║");
-        System.out.println("║ 0 - Voltar ao menu principal            ║");
-        System.out.println("╚═════════════════════════════════════════╝");
-        System.out.print("Opção: ");
-        opcao = entrada.nextInt();
+        do {
+            System.out.println("╔═════════════════════════════════════════╗");
+            System.out.println("║       MENU EXPORTAR/IMPORTAR DADOS      ║");
+            System.out.println("╠═════════════════════════════════════════╣");
+            System.out.println("║ 1 - Exportar dados dos alunos (JSON)    ║");
+            System.out.println("║ 2 - Importar dados dos alunos (MEC)     ║");
+            System.out.println("║ 0 - Voltar ao menu principal            ║");
+            System.out.println("╚═════════════════════════════════════════╝");
+            System.out.print("Opção: ");
+            opcao = entrada.nextInt();
 
-        switch (opcao) {
-            case 1:
-                System.out.println(exportarDadosEstudante()); // Exibe o JSON
-                break;
-            case 2:
-                importDadosEstudanteMEC();
-                break;
-            case 0:
-                System.out.println("Voltando ao menu principal...");
-                return; // Sai do método e volta ao menu principal
-            default:
-                System.out.println("Opção inválida!");
-        }
-    } while (opcao != 0); // Continua no loop até que o usuário escolha 0
-}
-
-    public static String exportarDadosEstudante() {
-    DataBase db = DataBase.getInstance();
-    ArrayList<String[]> data = new ArrayList<String[]>();
-
-    // Preenche os dados dos alunos
-    ArrayList<Aluno> alunos = db.getAlunos();
-    for (int i = 0; i < alunos.size(); i++) {
-        String[] sm = {"matricula", alunos.get(i).getMatricula()};
-        String[] sn = {"nome", alunos.get(i).getNome()};
-        String[] sc = {"cpf", alunos.get(i).getCpf()};
-        String[] st = {"telefone", alunos.get(i).getTelefone()};
-        String[] se = {"endereco", alunos.get(i).getEndereco()};
-        data.add(sm);
-        data.add(sn);
-        data.add(sc);
-        data.add(st);
-        data.add(se);
+            switch (opcao) {
+                case 1:
+                    System.out.println(exportarDadosEstudante());
+                    break;
+                case 2:
+                    importDadosEstudanteMEC();
+                    break;
+                case 0:
+                    System.out.println("Voltando ao menu principal...");
+                    menuPrincipal(); //volta pro menu principal
+                    return;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while (opcao != 0); //continua no loop até  o usuário escolher 0
     }
 
-    //usa o Adapter para converter XML para JSON
-    ExportData exportData = new ExportData();
-    AdapterExportDados adapter = new AdapterExportDados(exportData, data, 5, "student");
-    String json = adapter.toJson();
+    public static String exportarDadosEstudante() {
+        DataBase db = DataBase.getInstance();
+        ArrayList<String[]> data = new ArrayList<String[]>();
 
-    return json; // retrna o JSON
-}
+        // Preenche os dados dos alunos
+        ArrayList<Aluno> alunos = db.getAlunos();
+        for (int i = 0; i < alunos.size(); i++) {
+            String[] sm = {"matricula", alunos.get(i).getMatricula()};
+            String[] sn = {"nome", alunos.get(i).getNome()};
+            String[] sc = {"cpf", alunos.get(i).getCpf()};
+            String[] st = {"telefone", alunos.get(i).getTelefone()};
+            String[] se = {"endereco", alunos.get(i).getEndereco()};
+            data.add(sm);
+            data.add(sn);
+            data.add(sc);
+            data.add(st);
+            data.add(se);
+        }
+
+        //usa o Adapter para converter XML pra JSON
+        ExportData exportData = new ExportData();
+        AdapterExportDados adapter = new AdapterExportDados(exportData, data, 5, "student");
+        String json = adapter.toJson();
+
+        return json; // retrna o JSON
+    }
 
     public static void importDadosEstudanteMEC() {
         String data = exportarDadosEstudante();
