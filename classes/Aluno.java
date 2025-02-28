@@ -20,8 +20,6 @@ private String matricula;
     this.matricula = matricula;
   }
   
-  
-
   public void exibirDados() {
     System.out.println("Nome: " + this.getNome());
     System.out.println("CPF: " + this.getCpf());
