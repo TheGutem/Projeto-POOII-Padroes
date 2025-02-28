@@ -55,7 +55,6 @@ public class AdapterExportDados implements IDadoFormatado {
             }
             json.append("}");
         }
-
         //echa JSson
         json.append("]}");
 
