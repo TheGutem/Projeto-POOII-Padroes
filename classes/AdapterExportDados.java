@@ -25,35 +25,40 @@ public class AdapterExportDados implements IDadoFormatado {
 
     @Override
     public String toJson() {
-        //pega o XML de ExportData
+        //pega o XML da classe ExportData
         String xml = exportData.ArrayToXMLFormat(data, multipler, tag);
 
-        //converte XML pra JSON
+        //converte XML para JSON
         String json = convertXmlToJson(xml);
 
-        return json;
+        return json; //retorna o JSON
     }
 
     private String convertXmlToJson(String xml) {
-    //remove o cabeçalho XML
-    xml = xml.replace("<?xml version=\"1.0\"?>", "");
+        ////remove o cabeçalho XML
+        xml = xml.replaceAll("<\\?xml.*?\\?>", "").trim();
 
-    //converte XML p JSON
-    xml = xml.replace("<data>", "{\"" + tag + "\": [");
-    xml = xml.replace("</data>", "]}");
-    xml = xml.replace("<" + tag + ">", "{");
-    xml = xml.replace("</" + tag + ">", "}");
+        StringBuilder json = new StringBuilder();
+        json.append("{\"").append(tag).append("\": [");
 
-    for (String[] item : data) {
-        String key = item[0];
-        String value = item[1];
-        xml = xml.replace("<" + key + "> " + value + " </" + key + ">", "\"" + key + "\": \"" + value + "\",");
+        boolean firstItem = true;
+        for (String[] item : data) {
+            if (!firstItem) {
+                json.append(", "); //vírgula entre os itens para a formatação ficar certinha
+            }
+            firstItem = false;
+
+            json.append("{");
+            for (int i = 0; i < item.length; i += 2) {
+                if (i > 0) json.append(", ");
+                json.append("\"").append(item[i]).append("\": \"").append(item[i + 1]).append("\"");
+            }
+            json.append("}");
+        }
+
+        //echa JSson
+        json.append("]}");
+
+        return json.toString();
     }
-
-    xml = xml.replace(",}", "}");
-
-    xml = xml.replace("}{", "}, {");
-
-    return xml;
-}
 }
