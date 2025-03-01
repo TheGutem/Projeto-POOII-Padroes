@@ -23,37 +23,51 @@ public class Main {
     }
 
     public static void menuPrincipal() {
-        do {
-            System.out.println("╔═════════════════════════════════════════╗");
-            System.out.println("║          MENU PRINCIPAL            ║");
-            System.out.println("╠═════════════════════════════════════════╣");
-            System.out.println("║ 1 - Coordenador                    ║");
-            System.out.println("║ 2 - Professor                      ║");
-            System.out.println("║ 3 - Exportar/Importar Dados        ║");
-            System.out.println("║ 0 - Sair                           ║");
-            System.out.println("╚═════════════════════════════════════════╝");
-            System.out.print("Opção: ");
-            cargo = entrada.nextInt();
+    do {
+        System.out.println("╔═════════════════════════════════════════╗");
+        System.out.println("║          MENU PRINCIPAL                 ║");
+        System.out.println("╠═════════════════════════════════════════╣");
+        System.out.println("║ 1 - Coordenador                         ║");
+        System.out.println("║ 2 - Professor                           ║");
+        System.out.println("║ 0 - Sair                                ║");
+        System.out.println("╚═════════════════════════════════════════╝");
+        System.out.print("Opção: ");
+        cargo = entrada.nextInt();
+        entrada.nextLine(); // Consome a quebra de linha
 
-            switch (cargo) {
-                case 1:
+        switch (cargo) {
+            case 1:
+                if (verificarSenha("123")) {
                     menuCoordenador();
-                    break;
-                case 2:
+                } else {
+                    System.out.println("Senha incorreta! Retornando ao menu principal...");
+                }
+                break;
+            case 2:
+                if (verificarSenha("456")) {
                     menuProfessor();
-                    break;
-                case 3:
-                    menuExportarImportarDados();
-                    break;
-                case 0:
-                    System.out.println("Saindo...");
-                    entrada.close();
-                    return; //termina o programa
-                default:
-                    System.out.println("Opção inválida!");
-            }
-        } while (cargo != 0);
-    }
+                } else {
+                    System.out.println("Senha incorreta! Retornando ao menu principal...");
+                }
+                break;
+            case 0:
+                System.out.println("Saindo...");
+                entrada.close();
+                return;
+            default:
+                System.out.println("Opção inválida!");
+        }
+    } while (cargo != 0);
+}
+
+// Método para verificar senha
+public static boolean verificarSenha(String senhaCorreta) {
+    System.out.print("Digite a senha: ");
+    String senhaDigitada = entrada.nextLine(); // Usa nextLine para evitar problemas
+    return senhaDigitada.equals(senhaCorreta);
+}
+
+
 
     public static void menuCoordenador() {
         do {
@@ -72,6 +86,7 @@ public class Main {
             System.out.println("║    10 - Lista de recuperação    ║");
             System.out.println("║        11 - Lista geral         ║");
             System.out.println("║         12 - Histórico          ║");
+            System.out.println("║    13 - Exportar dados (JSON)   ║");
             System.out.println("║           0 - Voltar            ║");
             System.out.println("╚═════════════════════════════════════════╝");
             System.out.print("Opção: ");
@@ -113,6 +128,9 @@ public class Main {
                     break;
                 case 12:
                     exibirHistorico();
+                    break;
+                    case 13:
+                    menuExportarImportarDados();
                     break;
                 case 0:
                     System.out.println("Voltando ao menu principal...");
@@ -194,7 +212,6 @@ public class Main {
         DataBase db = DataBase.getInstance();
         ArrayList<String[]> data = new ArrayList<String[]>();
 
-        // Preenche os dados dos alunos
         ArrayList<Aluno> alunos = db.getAlunos();
         for (int i = 0; i < alunos.size(); i++) {
             String[] sm = {"matricula", alunos.get(i).getMatricula()};
