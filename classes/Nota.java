@@ -95,4 +95,8 @@ public String toString(){
     public void update(boolean param) {
        bloqueado = !param;
     }
+
+    void adicionarNota(double nota) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
